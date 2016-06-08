@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Moment</string>
+
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="header">Header:</string>
+    <string name="counts">%3d times</string>
+    <string name="screen_on_header">Screen On</string>
+    <string name="screen_off_header">Screen Off</string>
+    <string name="user_present_header">User Present</string>
+    <string name="present_alert_content">You have unlocked your phone for %3d times today, May you use phone too much today. Have a rest?</string>
+    <string name="admin_activate_hint">You can use it unless activate this!</string>
+</resources>

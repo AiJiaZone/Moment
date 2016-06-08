@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.woody.moment.ui.view.CircleView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/circle_bg3">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@id/id_text_header"
+        android:text="@string/header"
+        android:textSize="18sp"
+        android:textColor="#77FFFF00"
+        android:layout_gravity="center_vertical"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@id/id_text_content"
+        android:text="@string/counts"
+        android:textColor="#CCFFFF00"
+        android:textSize="26sp"
+        android:textStyle="bold"/>
+</com.woody.moment.ui.view.CircleView>

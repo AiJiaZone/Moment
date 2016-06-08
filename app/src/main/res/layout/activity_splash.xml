@@ -1,0 +1,46 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0099cc"
+    tools:context=".ui.SplashActivity">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="50dp">
+
+        <include
+            android:id="@+id/screen_on"
+            layout="@layout/circle_view" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/screen_on"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_marginLeft="180dp"
+        android:layout_marginTop="50dp">
+
+        <include
+            android:id="@+id/screen_off"
+            layout="@layout/circle_view" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="95dp"
+        android:layout_marginTop="200dp">
+
+        <include
+            android:id="@+id/user_present"
+            layout="@layout/circle_view" />
+
+    </FrameLayout>
+</FrameLayout>
