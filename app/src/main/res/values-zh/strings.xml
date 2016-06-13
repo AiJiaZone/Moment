@@ -8,4 +8,9 @@
     <string name="user_present_header">解锁</string>
     <string name="present_alert_content">您今天已经打开手机%3d次了。\n或许今天你用手机过多，要休息下？</string>
     <string name="admin_activate_hint">激活后才能使用锁屏功能</string>
+    <string name="settings">设置</string>
+    <string name="alert_threshold">提醒次数:</string>
+    <string name="alert_duration">提醒时长:</string>
+    <string name="alert_threshold_hint">当超过该次数后提醒自己使用过多</string>
+    <string name="alert_duration_hint">提醒亲使用手机时间过长</string>
 </resources>

@@ -4,5 +4,11 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <color name="window_background_color">#33AAEE</color>
+
     <color name="black_overlay">#66000000</color>
+    <color name="editbox_background">#efeecb</color>
+    <color name="item_background">#7F66CC99</color>
+
+    <color name="hint_text_color">#EEC8C8C8</color>
 </resources>

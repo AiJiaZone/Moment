@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/window_background_color"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:background="@drawable/setting_background">
+
+        <TextView
+            android:id="@+id/alert_threshold_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:gravity="bottom"
+            android:minHeight="50dp"
+            android:text="@string/alert_threshold"
+            android:textAlignment="gravity"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/alert_threshold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/alert_threshold_content"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/alert_threshold_content"
+            android:background="@drawable/edit_box_background"
+            android:elegantTextHeight="true"
+            android:gravity="center"
+            android:hint="30"
+            android:inputType="number"
+            android:maxLength="3"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/alert_threshold_content"
+            android:layout_marginLeft="10dp"
+            android:text="@string/alert_threshold_hint"
+            android:textStyle="italic"
+            android:textColor="@color/hint_text_color" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#ffff" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:background="@drawable/setting_background">
+
+        <TextView
+            android:id="@+id/alert_duration_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:gravity="bottom"
+            android:minHeight="50dp"
+            android:text="@string/alert_duration"
+            android:textAlignment="gravity"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/alert_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/alert_duration_content"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/alert_duration_content"
+            android:background="@drawable/edit_box_background"
+            android:elegantTextHeight="true"
+            android:gravity="center"
+            android:hint="30"
+            android:inputType="number"
+            android:maxLength="3"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/alert_duration_content"
+            android:layout_marginLeft="10dp"
+            android:text="@string/alert_duration_hint"
+            android:textStyle="italic"
+            android:textColor="@color/hint_text_color" />
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <corners android:radius="4dp"/>
+    <size android:height="20dp" android:width="80dp"/>
+    <gradient android:startColor="@color/editbox_background" android:endColor="@color/editbox_background"/>
+</shape>

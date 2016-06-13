@@ -11,6 +11,9 @@ import android.os.IBinder;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.woody.moment.MomentMonitorService;
@@ -88,6 +91,25 @@ public class SplashActivity extends AppCompatActivity {
         Log.v(TAG, "onConfigurationChanged");
         setContentView(R.layout.activity_splash);
         initViews();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.settings, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        final int id = item.getItemId();
+        if (R.id.setting == id) {
+            Intent intent = new Intent();
+            intent.setAction("moment.action.START_SETTING");
+            intent.setClass(getApplicationContext(), MomentSetting.class);
+            startActivity(intent);
+        }
+        return true;
     }
 
     @Override

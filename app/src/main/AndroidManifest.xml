@@ -31,6 +31,16 @@
                 <action android:name="moment.action.SHOW_ALERT" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.MomentSetting"
+            android:launchMode="singleTop"
+            android:label="@string/settings"
+            android:theme="@style/FullscreenTheme"
+            >
+            <intent-filter>
+                <action android:name="moment.action.START_SETTING"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
 
         <service android:name=".MomentMonitorService">
             <intent-filter>
@@ -46,9 +56,9 @@
         </receiver>
         <receiver
             android:name=".LockReceiver"
-            android:permission="android.permission.BIND_DEVICE_ADMIN"
             android:enabled="true"
-            android:exported="true">
+            android:exported="true"
+            android:permission="android.permission.BIND_DEVICE_ADMIN">
             <meta-data
                 android:name="android.app.device_admin"
                 android:resource="@xml/lock_screen" />
