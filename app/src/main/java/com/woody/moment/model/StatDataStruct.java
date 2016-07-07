@@ -6,13 +6,14 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Created by john on 6/3/16.
  */
 public class StatDataStruct {
-    final private static int DEFAULT_ALERT_THRESHOLD = 30;
+    public final static int DEFAULT_ALERT_THRESHOLD = 30;
 
     private static AtomicInteger screenOnCount;
     private static AtomicInteger screenOffCount;
     private static AtomicInteger userPresentCount;
     private static StatDataStruct sInstance = new StatDataStruct();
     private static int mAlertThreshold = DEFAULT_ALERT_THRESHOLD;
+    private static int mDuration = DEFAULT_ALERT_THRESHOLD;
 
     private StatDataStruct() {
         screenOnCount = new AtomicInteger(0);
@@ -22,6 +23,14 @@ public class StatDataStruct {
 
     public static StatDataStruct getStatDataInstance() {
         return sInstance;
+    }
+
+    final void setAlertThreshold(int threshold) {
+        mAlertThreshold = threshold;
+    }
+
+    final void setAlertDuration(int duration) {
+        mDuration = duration;
     }
 
     /**
