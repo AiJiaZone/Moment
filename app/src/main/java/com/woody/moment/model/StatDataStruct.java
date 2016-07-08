@@ -89,6 +89,9 @@ public class StatDataStruct {
     }
 
     final public long getAlertTime() {
-        return mDuration * 60 * 1000;
+        return mDuration;
+    }
+    final public int getAlertThreshold() {
+        return mAlertThreshold;
     }
 }

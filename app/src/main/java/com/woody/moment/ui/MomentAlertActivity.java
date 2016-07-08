@@ -10,9 +10,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.util.Log;
 
 import com.woody.moment.LockReceiver;
 import com.woody.moment.R;
+import com.woody.moment.model.SettingHelper;
 import com.woody.moment.model.StatDataStruct;
 
 /**
@@ -42,16 +44,37 @@ public class MomentAlertActivity extends Activity {
         showDialog();
     }
 
+    private String modeToString(int mode) {
+        switch (mode) {
+//            case SettingHelper.MODE_DEFAULT:
+//                return "MODE_DEFAULT()"+SettingHelper.MODE_DEFAULT;
+            case SettingHelper.MODE_NORMAL:
+                return "MODE_DEFAULT()"+SettingHelper.MODE_NORMAL;
+            case SettingHelper.MODE_EXTREME:
+                return "MODE_DEFAULT()"+SettingHelper.MODE_EXTREME;
+            case SettingHelper.MODE_TIME_TICKER:
+                return "MODE_DEFAULT()"+SettingHelper.MODE_TIME_TICKER;
+            default:
+                throw new IllegalArgumentException();
+        }
+    }
     @TargetApi(17)
     final private void showDialog() {
         if (mDialog == null) {
+            Intent intent = getIntent();
+            int mode = intent.getIntExtra(SettingHelper.MODE_TAG, SettingHelper.MODE_DEFAULT);
             AlertDialog.Builder builder = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_LIGHT);
-            builder.setMessage(String.format(getString(R.string.present_alert_content), mStats.getUserPresentCount()))
-                    .setOnDismissListener(mDismissListener)
+            Log.v("wujiujiu", "mode = "+modeToString(mode));
+            if (mode != SettingHelper.MODE_TIME_TICKER) {
+                builder.setMessage(String.format(getString(R.string.present_alert_content), mStats.getUserPresentCount()));
+            } else {
+                builder.setMessage(String.format(getString(R.string.present_alert_ticker), mStats.getAlertTime()));
+            }
+            builder.setOnDismissListener(mDismissListener)
                     .setPositiveButton(android.R.string.yes, mClickListener)
                     .setCancelable(false);
 
-            if (mDevicePolicyManager.isAdminActive(componentName)) {
+            if (mDevicePolicyManager.isAdminActive(componentName) && mode != SettingHelper.MODE_EXTREME) {
                 builder.setNegativeButton(android.R.string.cancel, mClickListener);
             }
 

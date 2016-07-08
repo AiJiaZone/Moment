@@ -10,6 +10,12 @@ import com.woody.moment.ui.MomentSetting;
  * Created by john on 7/7/16.
  */
 public class SettingHelper {
+    public static final int MODE_NORMAL = 1;
+    public static final int MODE_EXTREME = MODE_NORMAL << 1;
+    public static final int MODE_TIME_TICKER = MODE_NORMAL << 2;
+    public static final int MODE_DEFAULT = MODE_NORMAL;
+    public static final String MODE_TAG = "mode_tag";
+
     private static final String SETTING_PREF = "settings_pref";
     private static final String THRESHOLD = "threshold";
     private static final String DURATION = "duration";

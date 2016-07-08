@@ -13,6 +13,7 @@ import android.os.SystemClock;
 import android.os.UserHandle;
 import android.util.Log;
 
+import com.woody.moment.model.SettingHelper;
 import com.woody.moment.model.StatDataStruct;
 import com.woody.moment.ui.MomentAlertActivity;
 import com.woody.moment.ui.SplashActivity;
@@ -61,6 +62,7 @@ public class MomentMonitorService extends Service {
 
         Intent intent = new Intent(this, MomentAlertActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(SettingHelper.MODE_TAG, SettingHelper.MODE_TIME_TICKER);
         mPendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
     }
 
@@ -99,6 +101,11 @@ public class MomentMonitorService extends Service {
         Intent alertIntent = new Intent();
         alertIntent.setAction("moment.action.SHOW_ALERT");
         alertIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        if (mStats.getUserPresentCount() > mStats.getAlertThreshold() * 3) {
+            alertIntent.putExtra(SettingHelper.MODE_TAG, SettingHelper.MODE_EXTREME);
+        } else {
+            alertIntent.putExtra(SettingHelper.MODE_TAG, SettingHelper.MODE_NORMAL);
+        }
         alertIntent.setClass(getApplicationContext(), MomentAlertActivity.class);
         startActivity(alertIntent);
     }
@@ -113,7 +120,7 @@ public class MomentMonitorService extends Service {
 
     void setAlarm() {
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-        long duration = StatDataStruct.getStatDataInstance().getAlertTime();
+        long duration = StatDataStruct.getStatDataInstance().getAlertTime() * 60 * 1000;
         long firstTime = SystemClock.elapsedRealtime() + duration;
         alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME, firstTime, duration, mPendingIntent);
     }
