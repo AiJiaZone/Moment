@@ -1,5 +1,7 @@
 package com.woody.moment;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -7,6 +9,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Binder;
 import android.os.IBinder;
+import android.os.SystemClock;
+import android.os.UserHandle;
 import android.util.Log;
 
 import com.woody.moment.model.StatDataStruct;
@@ -26,6 +30,7 @@ public class MomentMonitorService extends Service {
      */
     UiCallback mCallBack = null;
 
+    private PendingIntent mPendingIntent;
     private MonitorBinder mBinder = new MonitorBinder();
 
     public MomentMonitorService() {
@@ -53,6 +58,10 @@ public class MomentMonitorService extends Service {
         filter.addAction(Intent.ACTION_SCREEN_ON);
         filter.addAction(Intent.ACTION_USER_PRESENT);
         registerReceiver(mReceiver, filter);
+
+        Intent intent = new Intent(this, MomentAlertActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mPendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
     }
 
     BroadcastReceiver mReceiver = new BroadcastReceiver() {
@@ -66,11 +75,14 @@ public class MomentMonitorService extends Service {
                     break;
                 case Intent.ACTION_SCREEN_OFF:
                     mStats.increaseScreenOffCount();
+                    cancelAlarm();
                     break;
                 case Intent.ACTION_USER_PRESENT:
                     mStats.increaseUserPresentCount();
                     if (mStats.isAboveThreshold()) {
                         startAlertActivity();
+                    } else {
+                        setAlarm();
                     }
                     break;
                 default:
@@ -97,5 +109,17 @@ public class MomentMonitorService extends Service {
 
     public interface UiCallback {
         void onUpdate();
+    }
+
+    void setAlarm() {
+        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        long duration = StatDataStruct.getStatDataInstance().getAlertTime();
+        long firstTime = SystemClock.elapsedRealtime() + duration;
+        alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME, firstTime, duration, mPendingIntent);
+    }
+
+    void cancelAlarm() {
+        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        alarmManager.cancel(mPendingIntent);
     }
 }

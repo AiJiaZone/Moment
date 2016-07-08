@@ -56,7 +56,6 @@ public class SettingHelper {
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
             int threshold = sharedPreferences.getInt(key, StatDataStruct.DEFAULT_ALERT_THRESHOLD);
-            Log.v("wujiujiu", "key = "+key+" threshold = "+threshold);
             if (THRESHOLD.equals(key)) {
                 StatDataStruct.getStatDataInstance().setAlertThreshold(threshold);
             } else if (DURATION.equals(key)) {

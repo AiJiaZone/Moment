@@ -87,4 +87,8 @@ public class StatDataStruct {
     final public boolean isAboveThreshold() {
         return userPresentCount.get() >= mAlertThreshold;
     }
+
+    final public long getAlertTime() {
+        return mDuration * 60 * 1000;
+    }
 }

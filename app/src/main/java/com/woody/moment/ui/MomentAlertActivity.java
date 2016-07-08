@@ -90,6 +90,7 @@ public class MomentAlertActivity extends Activity {
                 }
             } else {
                 dismissDialog();
+                finish();
             }
         }
     };
