@@ -110,7 +110,7 @@ public class MomentMonitorService extends Service {
 
     final private String getDateString() {
         Date date = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String dateString = dateFormat.format(date);
         return  dateString;
     }
