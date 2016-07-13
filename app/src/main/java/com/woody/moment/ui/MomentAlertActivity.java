@@ -21,7 +21,7 @@ import com.woody.moment.model.StatDataStruct;
  * Created by john on 6/7/16.
  */
 public class MomentAlertActivity extends Activity {
-
+    private final static String TAG = MomentAlertActivity.class.getSimpleName();
     private DevicePolicyManager mDevicePolicyManager;
     private ComponentName componentName;
     private final int MY_REQUEST_CODE = 1001;
@@ -49,22 +49,23 @@ public class MomentAlertActivity extends Activity {
 //            case SettingHelper.MODE_DEFAULT:
 //                return "MODE_DEFAULT()"+SettingHelper.MODE_DEFAULT;
             case SettingHelper.MODE_NORMAL:
-                return "MODE_DEFAULT()"+SettingHelper.MODE_NORMAL;
+                return "MODE_DEFAULT()" + SettingHelper.MODE_NORMAL;
             case SettingHelper.MODE_EXTREME:
-                return "MODE_DEFAULT()"+SettingHelper.MODE_EXTREME;
+                return "MODE_DEFAULT()" + SettingHelper.MODE_EXTREME;
             case SettingHelper.MODE_TIME_TICKER:
-                return "MODE_DEFAULT()"+SettingHelper.MODE_TIME_TICKER;
+                return "MODE_DEFAULT()" + SettingHelper.MODE_TIME_TICKER;
             default:
                 throw new IllegalArgumentException();
         }
     }
+
     @TargetApi(17)
     final private void showDialog() {
         if (mDialog == null) {
             Intent intent = getIntent();
             int mode = intent.getIntExtra(SettingHelper.MODE_TAG, SettingHelper.MODE_DEFAULT);
             AlertDialog.Builder builder = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_LIGHT);
-            Log.v("wujiujiu", "mode = "+modeToString(mode));
+            Log.v(TAG, "mode = " + modeToString(mode));
             if (mode != SettingHelper.MODE_TIME_TICKER) {
                 builder.setMessage(String.format(getString(R.string.present_alert_content), mStats.getUserPresentCount()));
             } else {
@@ -128,6 +129,7 @@ public class MomentAlertActivity extends Activity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.v(TAG, "requstCode = "+requestCode+ " resultCode = "+resultCode+ " Intent="+data);
         if (requestCode == MY_REQUEST_CODE && resultCode == RESULT_OK) {
             mDevicePolicyManager.lockNow();
             dismissDialog();

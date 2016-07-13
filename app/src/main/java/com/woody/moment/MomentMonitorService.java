@@ -18,6 +18,9 @@ import com.woody.moment.model.StatDataStruct;
 import com.woody.moment.ui.MomentAlertActivity;
 import com.woody.moment.ui.SplashActivity;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by john on 6/3/16.
  */
@@ -33,6 +36,8 @@ public class MomentMonitorService extends Service {
 
     private PendingIntent mPendingIntent;
     private MonitorBinder mBinder = new MonitorBinder();
+
+    private String mDateString = null;
 
     public MomentMonitorService() {
         Log.v(TAG, "MomentMonitorService");
@@ -81,10 +86,16 @@ public class MomentMonitorService extends Service {
                     break;
                 case Intent.ACTION_USER_PRESENT:
                     mStats.increaseUserPresentCount();
+                    Log.v(TAG, action+ " above?"+mStats.isAboveThreshold());
                     if (mStats.isAboveThreshold()) {
                         startAlertActivity();
                     } else {
                         setAlarm();
+                    }
+
+                    if (checkDateChanged()) {
+                        Log.v(TAG, "data has changed");
+                        mStats.resetStatData();
                     }
                     break;
                 default:
@@ -96,6 +107,27 @@ public class MomentMonitorService extends Service {
 
         }
     };
+
+    final private String getDateString() {
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
+        String dateString = dateFormat.format(date);
+        return  dateString;
+    }
+
+    final private boolean checkDateChanged() {
+        String dateString = getDateString();
+        if (mDateString == null) {
+            mDateString = dateString;
+            return false;
+        }
+        if (mDateString.equals(dateString)) {
+            return false;
+        } else {
+            mDateString = dateString;
+            return true;
+        }
+    }
 
     final private void startAlertActivity() {
         Intent alertIntent = new Intent();
@@ -119,14 +151,14 @@ public class MomentMonitorService extends Service {
     }
 
     void setAlarm() {
-        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         long duration = StatDataStruct.getStatDataInstance().getAlertTime() * 60 * 1000;
         long firstTime = SystemClock.elapsedRealtime() + duration;
         alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME, firstTime, duration, mPendingIntent);
     }
 
     void cancelAlarm() {
-        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         alarmManager.cancel(mPendingIntent);
     }
 }

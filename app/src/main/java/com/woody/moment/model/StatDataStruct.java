@@ -1,5 +1,7 @@
 package com.woody.moment.model;
 
+import android.util.Log;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -93,5 +95,11 @@ public class StatDataStruct {
     }
     final public int getAlertThreshold() {
         return mAlertThreshold;
+    }
+
+    final public void resetStatData() {
+        userPresentCount.set(1);
+        screenOffCount.set(1);
+        screenOnCount.set(1);
     }
 }
