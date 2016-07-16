@@ -16,6 +16,7 @@
             android:name=".ui.SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
+			android:excludeFromRecents="true"
             android:theme="@style/FullscreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,6 +27,7 @@
         <activity
             android:name=".ui.MomentAlertActivity"
             android:launchMode="singleTop"
+			android:excludeFromRecents="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
                 <action android:name="moment.action.SHOW_ALERT" />
@@ -33,7 +35,8 @@
         </activity>
         <activity android:name=".ui.MomentSetting"
             android:launchMode="singleTop"
-            android:label="@string/settings"
+			android:label="@string/settings"
+			android:excludeFromRecents="true"
             android:theme="@style/FullscreenTheme"
             >
             <intent-filter>
