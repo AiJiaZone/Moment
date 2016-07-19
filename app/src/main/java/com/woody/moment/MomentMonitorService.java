@@ -78,6 +78,10 @@ public class MomentMonitorService extends Service {
 
             switch (action) {
                 case Intent.ACTION_SCREEN_ON:
+                    if (checkDateChanged()) {
+                        Log.v(TAG, "data has changed");
+                        mStats.resetStatData();
+                    }
                     mStats.increaseScreenOnCount();
                     break;
                 case Intent.ACTION_SCREEN_OFF:
@@ -91,11 +95,6 @@ public class MomentMonitorService extends Service {
                         startAlertActivity();
                     } else {
                         setAlarm();
-                    }
-
-                    if (checkDateChanged()) {
-                        Log.v(TAG, "data has changed");
-                        mStats.resetStatData();
                     }
                     break;
                 default:
